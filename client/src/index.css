@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #0d0d0d;
+  --red: #e63312;
+  --yellow: #ffd600;
+  --white: #f5f5f0;
+  --grey: #1a1a1a;
+  --grey-mid: #333333;
+}
+
+@layer base {
+  * {
+    /* Brutalist: sharp edges everywhere. */
+    border-radius: 0 !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-black text-white font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--red);
+    color: #fff;
+  }
+
+  h1, h2, h3 {
+    @apply font-display tracking-wide;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border: 2px solid var(--black);
+  }
+}
+
+@layer components {
+  /* ── Display headline helper ── */
+  .display {
+    @apply font-display uppercase leading-[0.85] tracking-wide;
+  }
+
+  /* ── Mono label / eyebrow ── */
+  .label {
+    @apply font-mono uppercase tracking-[0.25em] text-xs;
+  }
+
+  /* ── Sharp red CTA ── */
+  .btn-red {
+    @apply inline-flex items-center justify-center gap-2 bg-red text-black font-display text-xl md:text-2xl
+           uppercase tracking-wider px-8 py-3 transition-all duration-200
+           hover:bg-yellow hover:shadow-neon active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-white text-white font-display text-xl md:text-2xl
+           uppercase tracking-wider px-8 py-3 transition-all duration-200
+           hover:bg-white hover:text-black active:translate-y-[1px];
+  }
+
+  /* ── Diner-sign style price tag ── */
+  .price-tag {
+    @apply font-mono font-bold text-red;
+  }
+}
+
+@layer utilities {
+  /* Film grain overlay for dark sections */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Red neon text glow */
+  .glow-red {
+    text-shadow: 0 0 14px rgba(230, 51, 18, 0.7), 0 0 40px rgba(230, 51, 18, 0.4);
+  }
+  .glow-yellow {
+    text-shadow: 0 0 14px rgba(255, 214, 0, 0.6);
+  }
+
+  /* Outlined display text (poster style) */
+  .text-stroke {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+  .text-stroke-red {
+    -webkit-text-stroke: 2px var(--red);
+    color: transparent;
+  }
+
+  /* Diagonal section cut */
+  .clip-slant-b {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+  .clip-slant-t {
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Hide scrollbars (gallery strip) */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Pause animation on hover (gallery / marquee) */
+  .pause-hover:hover * {
+    animation-play-state: paused;
+  }
+}

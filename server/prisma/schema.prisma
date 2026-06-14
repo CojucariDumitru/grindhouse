@@ -1,0 +1,92 @@
+// GRINDHOUSE — Prisma schema
+// "No shortcuts. No apologies."
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model MenuItem {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  price       Decimal      @db.Decimal(10, 2)
+  category    MenuCategory
+  image       String?
+  isPopular   Boolean      @default(false)
+  isNew       Boolean      @default(false)
+  isSpicy     Boolean      @default(false)
+  isVeg       Boolean      @default(false)
+  available   Boolean      @default(true)
+  order       Int          @default(0)
+  calories    Int?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([category])
+  @@index([isPopular])
+}
+
+enum MenuCategory {
+  BURGERS
+  LOADED_FRIES
+  SIDES
+  MILKSHAKES
+  SODAS
+  SAUCES
+}
+
+model Reservation {
+  id        String            @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  date      DateTime
+  time      String
+  guests    Int
+  notes     String?
+  status    ReservationStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([date])
+  @@index([status])
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([read])
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
