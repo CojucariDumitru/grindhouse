@@ -4,6 +4,9 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Base path. Defaults to '/' (Vercel/root hosting). For GitHub Pages
+  // project hosting, build with VITE_BASE=/grindhouse/.
+  base: process.env.VITE_BASE || '/',
   plugins: [react()],
   resolve: {
     alias: {

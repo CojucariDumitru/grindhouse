@@ -47,7 +47,16 @@ export const env = {
   adminPassword: optional('ADMIN_PASSWORD', 'Grind2024!'),
 };
 
-export const allowedOrigins = env.clientUrl
-  .split(',')
-  .map((o) => o.trim())
-  .filter(Boolean);
+// Origins always allowed in addition to CLIENT_URL, so the deployed
+// frontends work regardless of how CLIENT_URL is configured.
+const DEFAULT_ORIGINS = [
+  'https://grindhouse.vercel.app',
+  'https://cojucaridumitru.github.io',
+];
+
+export const allowedOrigins = Array.from(
+  new Set([
+    ...env.clientUrl.split(',').map((o) => o.trim()).filter(Boolean),
+    ...DEFAULT_ORIGINS,
+  ]),
+);
