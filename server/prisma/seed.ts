@@ -6,9 +6,9 @@ dotenv.config();
 
 const prisma = new PrismaClient();
 
-/** Unsplash food photo. The frontend shows a branded fallback if any URL fails. */
-const img = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&q=80`;
+/** Cloudinary delivery URL (images uploaded under grindhouse/ — see scripts/upload-cloudinary.mjs). */
+const cld = (id: string, t = 'c_fill,g_auto,w_900,h_900') =>
+  `https://res.cloudinary.com/dozr400tl/image/upload/${t},f_auto,q_auto/grindhouse/${id}`;
 
 type SeedItem = {
   name: string;
@@ -31,7 +31,7 @@ const MENU: SeedItem[] = [
       'The one that started it all. Double-smashed beef, American cheese, house sauce, pickles, diced onion on a toasted potato bun.',
     price: 12.99,
     category: 'BURGERS',
-    image: img('1568901346375-23c9450c58cd'),
+    image: cld('menu/og-smash'),
     calories: 780,
     isPopular: true,
   },
@@ -41,7 +41,7 @@ const MENU: SeedItem[] = [
       'Two quarter-pound smashed patties, double American cheese, double house sauce. For when one is never enough.',
     price: 16.99,
     category: 'BURGERS',
-    image: img('1553979459-d2229ba7433a'),
+    image: cld('menu/double-down'),
     calories: 1120,
     isPopular: true,
   },
@@ -51,7 +51,7 @@ const MENU: SeedItem[] = [
       'Smashed beef, pepper jack, charred jalapeño relish, ghost-pepper aioli. It bites back.',
     price: 14.99,
     category: 'BURGERS',
-    image: img('1550547660-d9450f859349'),
+    image: cld('menu/spicy-diablo'),
     calories: 890,
     isPopular: true,
     isSpicy: true,
@@ -62,7 +62,7 @@ const MENU: SeedItem[] = [
       'Grilled portobello, melted Swiss, caramelized onion, truffle mayo on brioche. Plant-forward, flavor-loaded.',
     price: 15.99,
     category: 'BURGERS',
-    image: img('1525059696034-4967a8e1dca2'),
+    image: cld('menu/mushroom-cloud'),
     calories: 720,
     isVeg: true,
   },
@@ -72,7 +72,7 @@ const MENU: SeedItem[] = [
       'Smashed beef, smoked bacon, crispy onion straws, aged cheddar, bourbon BBQ glaze.',
     price: 17.99,
     category: 'BURGERS',
-    image: img('1571091718767-18b5b1457add'),
+    image: cld('menu/bbq-bacon'),
     calories: 1240,
   },
   {
@@ -81,7 +81,7 @@ const MENU: SeedItem[] = [
       'Smashed beef, aged gruyère, black truffle aioli, wild arugula. Grown-up grindhouse.',
     price: 18.99,
     category: 'BURGERS',
-    image: img('1572802419224-296b0aeee0d9'),
+    image: cld('menu/truffle-shuffle'),
     calories: 960,
     isNew: true,
   },
@@ -91,7 +91,7 @@ const MENU: SeedItem[] = [
       'Single smashed patty, American cheese, crisp lettuce, tomato, house sauce. No notes.',
     price: 11.99,
     category: 'BURGERS',
-    image: img('1586190848861-99aa4a171e90'),
+    image: cld('menu/classic'),
     calories: 650,
   },
   {
@@ -100,7 +100,7 @@ const MENU: SeedItem[] = [
       'Smashed beef, fried egg, hash brown, maple bacon, American cheese. Morning, noon, or 2am.',
     price: 13.99,
     category: 'BURGERS',
-    image: img('1607013251379-e6eecfffe234'),
+    image: cld('menu/breakfast-smash'),
     calories: 850,
     isNew: true,
   },
@@ -111,7 +111,7 @@ const MENU: SeedItem[] = [
     description: 'Hand-cut, double-fried, sea salt. The blank canvas.',
     price: 6.99,
     category: 'LOADED_FRIES',
-    image: img('1573080496219-bb080dd4f877'),
+    image: cld('menu/og-fries'),
     calories: 480,
   },
   {
@@ -119,7 +119,7 @@ const MENU: SeedItem[] = [
     description: 'Loaded with molten cheese sauce, crispy onions, and house seasoning.',
     price: 8.99,
     category: 'LOADED_FRIES',
-    image: img('1639024471283-03518883512d'),
+    image: cld('menu/cheese-bomb'),
     calories: 720,
     isPopular: true,
   },
@@ -128,7 +128,7 @@ const MENU: SeedItem[] = [
     description: 'Fries tossed in truffle oil, shaved parmesan, fresh parsley.',
     price: 9.99,
     category: 'LOADED_FRIES',
-    image: img('1630384060421-cb20d0e0649d'),
+    image: cld('menu/truffle-parm'),
     calories: 690,
     isNew: true,
   },
@@ -137,7 +137,7 @@ const MENU: SeedItem[] = [
     description: 'Smothered in slow-cooked beef chili, cheddar, jalapeño, sour cream.',
     price: 9.99,
     category: 'LOADED_FRIES',
-    image: img('1598679253544-2c97992403ea'),
+    image: cld('menu/chili-fries'),
     calories: 810,
     isSpicy: true,
   },
@@ -148,7 +148,7 @@ const MENU: SeedItem[] = [
     description: 'Beer-battered, golden, stacked high. Comes with house dip.',
     price: 5.99,
     category: 'SIDES',
-    image: img('1639744210470-5e7e3d8b3b80'),
+    image: cld('menu/onion-rings'),
     calories: 420,
   },
   {
@@ -156,7 +156,7 @@ const MENU: SeedItem[] = [
     description: 'Crunchy, tangy, made fresh daily. The cooldown.',
     price: 3.99,
     category: 'SIDES',
-    image: img('1625938145312-c12d9b0a9c79'),
+    image: cld('menu/coleslaw'),
     calories: 220,
     isVeg: true,
   },
@@ -165,7 +165,7 @@ const MENU: SeedItem[] = [
     description: 'Crispy-fried mac & cheese bites with a molten center.',
     price: 6.99,
     category: 'SIDES',
-    image: img('1612152328178-cbc3a4f4a0e2'),
+    image: cld('menu/mac-bites'),
     calories: 560,
   },
 
@@ -175,7 +175,7 @@ const MENU: SeedItem[] = [
     description: 'Real vanilla bean, hand-spun thick. Whipped cream recommended.',
     price: 7.99,
     category: 'MILKSHAKES',
-    image: img('1572490122747-3968b75cc699'),
+    image: cld('menu/vanilla-shake'),
     calories: 540,
   },
   {
@@ -183,7 +183,7 @@ const MENU: SeedItem[] = [
     description: 'Cookies & cream blended thick with crushed Oreo and a fudge swirl.',
     price: 8.99,
     category: 'MILKSHAKES',
-    image: img('1568901839119-631418a3910d'),
+    image: cld('menu/oreo-shake'),
     calories: 720,
     isPopular: true,
   },
@@ -192,7 +192,7 @@ const MENU: SeedItem[] = [
     description: 'Fresh strawberry shake with a strawberry-compote ripple.',
     price: 8.99,
     category: 'MILKSHAKES',
-    image: img('1629203851122-3726ecdf080e'),
+    image: cld('menu/strawberry-shake'),
     calories: 610,
   },
 
@@ -202,7 +202,7 @@ const MENU: SeedItem[] = [
     description: 'Fresh-squeezed, not too sweet, served over crushed ice.',
     price: 3.99,
     category: 'SODAS',
-    image: img('1437418747212-8d9709afab22'),
+    image: cld('menu/lemonade'),
     calories: 180,
     isVeg: true,
   },
@@ -211,21 +211,42 @@ const MENU: SeedItem[] = [
     description: 'Our small-batch cola — vanilla, citrus, real cane sugar.',
     price: 3.99,
     category: 'SODAS',
-    image: img('1581006852262-e4307cf6283a'),
+    image: cld('menu/cola'),
     calories: 200,
+    isVeg: true,
+  },
+
+  // ───────── SAUCES ─────────
+  {
+    name: 'House Sauce',
+    description: 'The secret one. Tangy, smoky, slightly sweet. Goes on everything (it already does).',
+    price: 1.99,
+    category: 'SAUCES',
+    image: cld('menu/house-sauce'),
+    calories: 120,
+    isVeg: true,
+  },
+  {
+    name: 'Diablo Sauce',
+    description: 'Ghost-pepper aioli for the brave. Adds heat to anything on the board.',
+    price: 1.99,
+    category: 'SAUCES',
+    image: cld('menu/diablo-sauce'),
+    calories: 110,
+    isSpicy: true,
     isVeg: true,
   },
 ];
 
 const GALLERY: { url: string; alt: string }[] = [
-  { url: img('1568901346375-23c9450c58cd'), alt: 'Smash burger close-up' },
-  { url: img('1571091718767-18b5b1457add'), alt: 'Burger and loaded fries' },
-  { url: img('1550547660-d9450f859349'), alt: 'Spicy burger stacked high' },
-  { url: img('1572802419224-296b0aeee0d9'), alt: 'Truffle burger plated' },
-  { url: img('1639024471283-03518883512d'), alt: 'Cheese-loaded fries' },
-  { url: img('1572490122747-3968b75cc699'), alt: 'Thick vanilla milkshake' },
-  { url: img('1607013251379-e6eecfffe234'), alt: 'Breakfast smash burger' },
-  { url: img('1553979459-d2229ba7433a'), alt: 'Double stacked burger' },
+  { url: cld('gallery/g1'), alt: 'Smash burger close-up' },
+  { url: cld('gallery/g2'), alt: 'Burger and loaded fries' },
+  { url: cld('gallery/g3'), alt: 'Spicy burger stacked high' },
+  { url: cld('gallery/g4'), alt: 'Truffle burger plated' },
+  { url: cld('gallery/g5'), alt: 'Cheese-loaded fries' },
+  { url: cld('gallery/g6'), alt: 'Thick vanilla milkshake' },
+  { url: cld('gallery/g7'), alt: 'Breakfast smash burger' },
+  { url: cld('gallery/g8'), alt: 'Double stacked burger' },
 ];
 
 function daysFromNow(days: number, hours = 0): Date {

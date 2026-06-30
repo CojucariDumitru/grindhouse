@@ -2,9 +2,7 @@ import { motion } from 'framer-motion';
 import { FoodImage } from '../components/ui/FoodImage';
 import { Button } from '../components/ui/Button';
 import { SITE } from '../lib/site';
-
-const u = (id: string, w = 800) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+import { img } from '../lib/img';
 
 const STORY = [
   {
@@ -14,7 +12,7 @@ const STORY = [
       'It began as a pop-up on a Brooklyn sidewalk in 2019 — one griddle, one cooler, and a hand-painted sign. The smell pulled people off the train. The line wrapped the block by week three.',
       'We never planned to open a restaurant. The neighborhood basically demanded it.',
     ],
-    img: u('1556910103-1c02745aae4d'),
+    img: img.card('about/origin'),
     flip: false,
   },
   {
@@ -24,7 +22,7 @@ const STORY = [
       'We grind a custom blend of brisket, short rib and chuck every single morning. Never frozen, never pre-formed. Hand-pressed onto a screaming-hot flat top so the edges go lacy and crisp.',
       'Sourced from a family ranch upstate. We know the people. We know the cows. That matters.',
     ],
-    img: u('1551782450-a2132b4ba21d'),
+    img: img.card('about/meat'),
     flip: true,
   },
   {
@@ -34,15 +32,15 @@ const STORY = [
       'There is one sauce. We will never tell you what is in it. People have offered us money. People have tried to reverse-engineer it in home labs. They were close. They were not right.',
       'It goes on everything. Resistance is futile.',
     ],
-    img: u('1607013251379-e6eecfffe234'),
+    img: img.card('about/sauce'),
     flip: false,
   },
 ];
 
 const CREW = [
-  { name: 'Theo Marsh', role: 'Founder / Head Cook', img: u('1583394838336-acd977736f90', 500) },
-  { name: 'Lena Ortiz', role: 'Kitchen Director', img: u('1577219491135-ce391730fb2c', 500) },
-  { name: 'Dré Coleman', role: 'Pit & Sauce Master', img: u('1622253692010-333f2da6031d', 500) },
+  { name: 'Theo Marsh', role: 'Founder / Head Cook', img: img.portrait('crew/theo') },
+  { name: 'Lena Ortiz', role: 'Kitchen Director', img: img.portrait('crew/lena') },
+  { name: 'Dré Coleman', role: 'Pit & Sauce Master', img: img.portrait('crew/dre') },
 ];
 
 const VALUES = ['Quality Or Nothing.', 'Sourced Local. Always.', 'Made To Order. Every Time.'];
@@ -91,7 +89,7 @@ export default function About() {
       {/* hero */}
       <section className="relative h-[70vh] min-h-[440px] flex items-end overflow-hidden">
         <FoodImage
-          src={u('1514516345957-556ca7d90a29', 1600)}
+          src={img.wide('site/about-hero')}
           alt="The GRINDHOUSE kitchen"
           className="absolute inset-0 w-full h-full"
         />

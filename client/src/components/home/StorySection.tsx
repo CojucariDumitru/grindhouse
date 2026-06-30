@@ -1,14 +1,12 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FoodImage } from '../ui/FoodImage';
-
-const u = (id: string, w = 600) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+import { img } from '../../lib/img';
 
 const GRID = [
-  { src: u('1565299624946-b28f40a0ae38'), alt: 'On the grill', span: 'row-span-2' },
-  { src: u('1550547660-d9450f859349'), alt: 'Stacked burger', span: '' },
-  { src: u('1571091718767-18b5b1457add'), alt: 'Burger & fries', span: '' },
+  { src: img.square('story/grill', 600), alt: 'On the grill', span: 'row-span-2' },
+  { src: img.square('story/stack', 600), alt: 'Stacked burger', span: '' },
+  { src: img.square('story/combo', 600), alt: 'Burger & fries', span: '' },
 ];
 
 const STATS = [

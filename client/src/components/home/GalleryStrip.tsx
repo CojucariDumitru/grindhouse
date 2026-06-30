@@ -1,17 +1,15 @@
 import { FoodImage } from '../ui/FoodImage';
-
-const u = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=500&q=80`;
+import { img } from '../../lib/img';
 
 const IMAGES = [
-  { src: u('1568901346375-23c9450c58cd'), alt: 'Smash burger' },
-  { src: u('1571091718767-18b5b1457add'), alt: 'Burger and fries' },
-  { src: u('1550547660-d9450f859349'), alt: 'Spicy burger' },
-  { src: u('1572802419224-296b0aeee0d9'), alt: 'Truffle burger' },
-  { src: u('1639024471283-03518883512d'), alt: 'Loaded fries' },
-  { src: u('1572490122747-3968b75cc699'), alt: 'Milkshake' },
-  { src: u('1607013251379-e6eecfffe234'), alt: 'Breakfast burger' },
-  { src: u('1553979459-d2229ba7433a'), alt: 'Double burger' },
+  { src: img.square('gallery/g1', 500), alt: 'Smash burger' },
+  { src: img.square('gallery/g2', 500), alt: 'Burger and fries' },
+  { src: img.square('gallery/g3', 500), alt: 'Spicy burger' },
+  { src: img.square('gallery/g4', 500), alt: 'Truffle burger' },
+  { src: img.square('gallery/g5', 500), alt: 'Loaded fries' },
+  { src: img.square('gallery/g6', 500), alt: 'Milkshake' },
+  { src: img.square('gallery/g7', 500), alt: 'Breakfast burger' },
+  { src: img.square('gallery/g8', 500), alt: 'Double burger' },
 ];
 
 export function GalleryStrip() {

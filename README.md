@@ -7,13 +7,18 @@
 Full-stack TypeScript monorepo: a React + Vite storefront, an Express + Prisma API,
 a Postgres database (Neon), transactional email (Resend), and image hosting (Cloudinary).
 
+### 🔗 Live
+- **Site:** https://cojucaridumitru.github.io/grindhouse/
+- **API:** https://grindhouse-api.onrender.com/api/health
+- **Admin:** https://cojucaridumitru.github.io/grindhouse/admin — `admin@grindhouse.com` / `Grind2024!`
+
 ---
 
 ## ✨ Features
 
 **Storefront**
 - Cinematic hero with floating hero image, neon glow & scrolling tickers
-- Live menu (20 items) with sticky category tabs, badges (🌶 spicy / 🌱 veg / ⭐ new)
+- Live menu (22 items across 6 categories) with sticky category tabs, badges (🌶 spicy / 🌱 veg / ⭐ new)
 - Reservation booking with validation + confirmation email
 - Contact form → saved to DB + email notification
 - Parallax About page, auto-scrolling gallery, Google Maps location block

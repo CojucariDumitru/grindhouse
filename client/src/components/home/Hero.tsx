@@ -4,9 +4,9 @@ import { Button } from '../ui/Button';
 import { FoodImage } from '../ui/FoodImage';
 import { Marquee } from './Marquee';
 import { SITE } from '../../lib/site';
+import { img } from '../../lib/img';
 
-const HERO_IMG =
-  'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1100&q=85';
+const HERO_IMG = img.hero('site/hero');
 
 const TICKER = [
   'SMASH BURGERS',
