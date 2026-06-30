@@ -22,8 +22,9 @@ app.use(helmet());
 app.use(
   cors({
     origin(origin, callback) {
-      // allow non-browser tools (no origin) and any whitelisted origin
-      if (!origin || allowedOrigins.includes(origin)) {
+      // allow non-browser tools (no origin), any whitelisted origin, and any
+      // Vercel deployment (*.vercel.app) so preview/prod URLs work out of the box
+      if (!origin || allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
         return callback(null, true);
       }
       return callback(new Error(`Origin ${origin} not allowed by CORS`));

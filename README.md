@@ -8,9 +8,10 @@ Full-stack TypeScript monorepo: a React + Vite storefront, an Express + Prisma A
 a Postgres database (Neon), transactional email (Resend), and image hosting (Cloudinary).
 
 ### 🔗 Live
-- **Site:** https://cojucaridumitru.github.io/grindhouse/
-- **API:** https://grindhouse-api.onrender.com/api/health
-- **Admin:** https://cojucaridumitru.github.io/grindhouse/admin — `admin@grindhouse.com` / `Grind2024!`
+- **Site (Vercel):** https://grindhouse-one.vercel.app
+- **Site (GitHub Pages mirror):** https://cojucaridumitru.github.io/grindhouse/
+- **API (Render):** https://grindhouse-api.onrender.com/api/health
+- **Admin:** https://grindhouse-one.vercel.app/admin — `admin@grindhouse.com` / `Grind2024!`
 
 ---
 

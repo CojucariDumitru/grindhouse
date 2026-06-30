@@ -1,0 +1,6 @@
+# Vercel
+.vercel
+
+# Local env overrides (keep .env.production / .env.development tracked)
+.env.local
+.env*.local
