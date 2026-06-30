@@ -12,6 +12,19 @@ const RED = '#E63312';
 const BLACK = '#0D0D0D';
 const YELLOW = '#FFD600';
 
+/**
+ * Demo email mode. There is no verified Resend domain for grindhouse.com, so
+ * we send from Resend's shared sender (`onboarding@resend.dev`) and route every
+ * message to the owner's inbox — making the full confirmation/notification flow
+ * visible end-to-end. The original intended recipient is shown in the subject.
+ *
+ * For real delivery to actual customers: verify a domain in Resend, set
+ * EMAIL_FROM to an address on it, and flip DEMO_MODE to false.
+ */
+const DEMO_MODE = true;
+const DEMO_TO = process.env.EMAIL_DEMO_TO || 'waxent@sasuke.ru';
+const DEMO_FROM = 'GRINDHOUSE <onboarding@resend.dev>';
+
 interface ReservationEmailData {
   name: string;
   email: string;
@@ -42,11 +55,16 @@ async function send(opts: {
     return { sent: false };
   }
 
+  const intended = Array.isArray(opts.to) ? opts.to.join(', ') : opts.to;
+  const from = DEMO_MODE ? DEMO_FROM : `${RESTAURANT.name} <${env.emailFrom}>`;
+  const to = DEMO_MODE ? DEMO_TO : opts.to;
+  const subject = DEMO_MODE ? `[Demo → ${intended}] ${opts.subject}` : opts.subject;
+
   try {
     const { data, error } = await resend.emails.send({
-      from: `${RESTAURANT.name} <${env.emailFrom}>`,
-      to: opts.to,
-      subject: opts.subject,
+      from,
+      to,
+      subject,
       html: opts.html,
     });
     if (error) {
